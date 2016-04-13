@@ -1,10 +1,8 @@
 FROM ubuntu:trusty
 
-MAINTAINER Kristian Peters <kpeters@ipb-halle.de>
+MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
-LABEL Description="Install RStudio Server + important R & Bioconductor packages in Docker."
-
-
+LABEL Description="Install RStudio Server + BATMAN in Docker."
 
 # Environment variables
 ENV DISPLAY=":1"
@@ -48,6 +46,13 @@ RUN rm /tmp/rstudio.deb
 # Install R packages
 RUN for PACK in $PACK_R; do R -e "install.packages(\"$PACK\", repos='https://cran.rstudio.com/')"; done
 
+# install additional packages in R
+RUN echo 'install.packages("doSNOW")' > /install_batman.R
+RUN echo 'install.packages("plotrix")' >> /install_batman.R
+RUN echo 'install.packages("batman", repos="http://R-Forge.R-project.org")' >> /install_batman.R
+
+RUN Rscript /install_batman.R
+
 
 # Update R packages
 RUN R -e "update.packages(repos='https://cran.rstudio.com/', ask=F)"
@@ -61,12 +66,6 @@ RUN echo "#!/bin/sh" > /usr/sbin/rstudio-server.sh
 RUN echo "/usr/lib/rstudio-server/bin/rserver --server-daemonize=0" >> /usr/sbin/rstudio-server.sh
 RUN chmod +x /usr/sbin/rstudio-server.sh
 
-# install additional packages in R
-RUN echo 'install.packages("doSNOW")' > /install_batman.R
-RUN echo 'install.packages("plotrix")' >> /install_batman.R
-RUN echo 'install.packages("batman", repos="http://R-Forge.R-project.org")' >> /install_batman.R
-
-RUN Rscript /install_batman.R
 
 # Infrastructure specific
 RUN groupadd -g 9999 -f rstudio
