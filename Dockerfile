@@ -1,10 +1,9 @@
+
 FROM ubuntu:trusty
 
 MAINTAINER Kristian Peters <kpeters@ipb-halle.de>
 
 LABEL Description="Install RStudio Server + important R & Bioconductor packages in Docker."
-
-
 
 # Environment variables
 ENV DISPLAY=":1"
@@ -12,7 +11,7 @@ ENV PATH="/usr/local/bin/:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/bin
 ENV PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/lib/pkgconfig"
 ENV LD_LIBRARY_PATH="/usr/lib64:/usr/lib:/usr/local/lib64:/usr/local/lib"
 
-ENV PACK_R="abind BH cba curl dendextend devtools extrafont FactoMineR geometry ggplot2 Hmisc httr klaR Matrix matrixStats mda memoise plotly plotrix R6 rCharts Rcpp rmarkdown rsm rstudioapi RUnit squash tools doSNOW"
+ENV PACK_R="abind BH cba curl dendextend devtools extrafont FactoMineR geometry ggplot2 Hmisc httr klaR Matrix matrixStats mda memoise plotly plotrix R6 rCharts Rcpp rmarkdown rsm rstudioapi RUnit squash tools doSNOW dplyr Cairo"
 #ENV PACK_BIOC="mtbls2 Risa"
 ENV PACK_GITHUB="jcapelladesto/geoRge rstudio/rmarkdown vbonhomme/Momocs "
 
@@ -30,7 +29,7 @@ RUN apt-get -y dist-upgrade
 RUN apt-get -y install wget r-base gdebi-core psmisc libapparmor1
 
 # Install development files needed for general compilation
-RUN apt-get -y install cmake ed freeglut3-dev g++ gcc git libcurl4-gnutls-dev libgfortran-4.8-dev libglu1-mesa-dev libgomp1 libssl-dev libxml2-dev python xorg-dev
+RUN apt-get -y install cmake ed freeglut3-dev g++ gcc git libcurl4-gnutls-dev libgfortran-4.8-dev libglu1-mesa-dev libgomp1 libssl-dev libxml2-dev libcairo2-dev python xorg-dev
 
 
 # Install RStudio from their repository
@@ -39,7 +38,6 @@ RUN wget -O /tmp/rstudio.deb "$(cat /tmp/rstudio-server-download.html | grep amd
 RUN dpkg -i /tmp/rstudio.deb
 RUN rm /tmp/rstudio-server-download.html
 RUN rm /tmp/rstudio.deb
-
 # Clean up
 #RUN apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/{cache,log}/ /tmp/* /var/tmp/*
 
@@ -55,7 +53,7 @@ RUN R -e "update.packages(repos='https://cran.rstudio.com/', ask=F)"
 # install additional packages in R
 #RUN echo 'install.packages("doSNOW")' > /install_batman.R
 #RUN echo 'install.packages("plotrix")' >> /install_batman.R
-RUN do R -e 'install.packages("batman", repos="http://R-Forge.R-project.org")'; done
+RUN R -e "install.packages('batman', repos='http://R-Forge.R-project.org')"
 #RUN Rscript /install_batman.R
 
 
@@ -71,7 +69,6 @@ RUN chmod +x /usr/sbin/rstudio-server.sh
 RUN groupadd -g 9999 -f rstudio
 RUN useradd -d /home/rstudio -m -g rstudio -u 9999 -s /bin/bash rstudio
 RUN echo 'rstudio:docker' | chpasswd
-
 #RUN apt-get -y install ldap-utils libpam-ldapd libnss-ldapd libldap2-dev nslcd
 #WORKDIR /
 #ADD etc/ldap.conf /etc/ldap.conf
@@ -99,4 +96,3 @@ EXPOSE 8080
 # Define Entry point script
 WORKDIR /
 ENTRYPOINT ["/bin/sh","/usr/sbin/rstudio-server.sh"]
-
