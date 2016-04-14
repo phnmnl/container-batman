@@ -1,9 +1,9 @@
 
 FROM ubuntu:trusty
 
-MAINTAINER Kristian Peters <kpeters@ipb-halle.de>
+MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
-LABEL Description="Install RStudio Server + important R & Bioconductor packages in Docker."
+LABEL Description="Install RStudio Server + BATMAN in Docker."
 
 # Environment variables
 ENV DISPLAY=":1"
