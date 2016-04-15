@@ -1,4 +1,3 @@
-
 FROM ubuntu:trusty
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
@@ -6,7 +5,7 @@ MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 LABEL Description="Install RStudio Server + BATMAN in Docker."
 
 # Environment variables
-ENV DISPLAY=":1"
+#ENV DISPLAY=":1"
 ENV PATH="/usr/local/bin/:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/bin:/sbin"
 ENV PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/lib/pkgconfig"
 ENV LD_LIBRARY_PATH="/usr/lib64:/usr/lib:/usr/local/lib64:/usr/local/lib"
@@ -29,7 +28,7 @@ RUN apt-get -y dist-upgrade
 RUN apt-get -y install wget r-base gdebi-core psmisc libapparmor1
 
 # Install development files needed for general compilation
-RUN apt-get -y install cmake ed freeglut3-dev g++ gcc git libcurl4-gnutls-dev libgfortran-4.8-dev libglu1-mesa-dev libgomp1 libssl-dev libxml2-dev libcairo2-dev python xorg-dev
+RUN apt-get -y install cmake ed freeglut3-dev g++ gcc git libcurl4-gnutls-dev libgfortran-4.8-dev libglu1-mesa-dev libgomp1 libssl-dev libxml2-dev libcairo2-dev python xorg-dev libxext-dev libxrender-dev libxtst-dev xorg openbox
 
 
 # Install RStudio from their repository
@@ -50,11 +49,8 @@ RUN for PACK in $PACK_R; do R -e "install.packages(\"$PACK\", repos='https://cra
 # Update R packages
 RUN R -e "update.packages(repos='https://cran.rstudio.com/', ask=F)"
 
-# install additional packages in R
-#RUN echo 'install.packages("doSNOW")' > /install_batman.R
-#RUN echo 'install.packages("plotrix")' >> /install_batman.R
+# install BATMAN packages in R
 RUN R -e "install.packages('batman', repos='http://R-Forge.R-project.org')"
-#RUN Rscript /install_batman.R
 
 
 # Configure RStudio server
@@ -62,6 +58,7 @@ ADD rserver.conf /etc/rstudio/rserver.conf
 ADD rsession.conf /etc/rstudio/rsession.conf
 RUN echo "#!/bin/sh" > /usr/sbin/rstudio-server.sh
 RUN echo "/usr/lib/rstudio-server/bin/rserver --server-daemonize=0" >> /usr/sbin/rstudio-server.sh
+RUN echo "sudo xvfb-run rstudio-server restart" >> /usr/sbin/rstudio-server.sh
 RUN chmod +x /usr/sbin/rstudio-server.sh
 
 
@@ -69,25 +66,6 @@ RUN chmod +x /usr/sbin/rstudio-server.sh
 RUN groupadd -g 9999 -f rstudio
 RUN useradd -d /home/rstudio -m -g rstudio -u 9999 -s /bin/bash rstudio
 RUN echo 'rstudio:docker' | chpasswd
-#RUN apt-get -y install ldap-utils libpam-ldapd libnss-ldapd libldap2-dev nslcd
-#WORKDIR /
-#ADD etc/ldap.conf /etc/ldap.conf
-#ADD etc/ldap /etc/ldap
-#ADD etc/pam.d /etc/pam.d
-#ADD etc/nsswitch.conf /etc/nsswitch.conf
-#ADD etc/nslcd.conf /etc/nslcd.conf
-#RUN chmod 660 /etc/nslcd.conf
-#ADD etc/ssl/certs/IPB* /etc/ssl/certs/
-#RUN update-rc.d nslcd enable
-#RUN mkdir /raid
-#RUN ln -s /home /raid/home
-#
-#RUN echo "#!/bin/sh" > /usr/sbin/rstudio-server.sh
-#RUN echo "service nslcd start" >> /usr/sbin/rstudio-server.sh
-#RUN echo "sleep 10" >> /usr/sbin/rstudio-server.sh
-#RUN echo "/usr/lib/rstudio-server/bin/rserver --server-daemonize=0" >> /usr/sbin/rstudio-server.sh
-#RUN chmod +x /usr/sbin/rstudio-server.sh
-
 
 
 # expose port
