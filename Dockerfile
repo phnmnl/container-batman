@@ -1,34 +1,34 @@
-FROM ubuntu:trusty
+FROM r-base:latest
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
 LABEL Description="Install RStudio Server + BATMAN in Docker."
 
 # Environment variables
-#ENV DISPLAY=":1"
+ENV DISPLAY=":0"
 ENV PATH="/usr/local/bin/:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/bin:/sbin"
 ENV PKG_CONFIG_PATH="/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/lib/pkgconfig"
 ENV LD_LIBRARY_PATH="/usr/lib64:/usr/lib:/usr/local/lib64:/usr/local/lib"
 
 ENV PACK_R="abind BH cba curl dendextend devtools extrafont FactoMineR geometry ggplot2 Hmisc httr klaR Matrix matrixStats mda memoise plotly plotrix R6 rCharts Rcpp rmarkdown rsm rstudioapi RUnit squash tools doSNOW dplyr Cairo"
 #ENV PACK_BIOC="mtbls2 Risa"
-ENV PACK_GITHUB="jcapelladesto/geoRge rstudio/rmarkdown vbonhomme/Momocs "
+ENV PACK_GITHUB="rstudio/rmarkdown"
 
 
 # Add cran R backport
-RUN apt-get -y install apt-transport-https
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-RUN echo "deb https://cran.uni-muenster.de/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list
+#RUN apt-get -y install apt-transport-https
+#RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+#RUN echo "deb https://cran.uni-muenster.de/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list
 
 # Update & upgrade sources
 RUN apt-get -y update
 RUN apt-get -y dist-upgrade
 
 # Install RStudio-related packages
-RUN apt-get -y install wget r-base gdebi-core psmisc libapparmor1
+RUN apt-get -y install wget psmisc libedit2 libssl-dev libxml2-dev
 
 # Install development files needed for general compilation
-RUN apt-get -y install cmake ed freeglut3-dev g++ gcc git libcurl4-gnutls-dev libgfortran-4.8-dev libglu1-mesa-dev libgomp1 libssl-dev libxml2-dev libcairo2-dev python xorg-dev libxext-dev libxrender-dev libxtst-dev xorg openbox
+#RUN apt-get -y install cmake ed freeglut3-dev g++ gcc git libcurl4-gnutls-dev libgfortran-4.8-dev libglu1-mesa-dev libgomp1 libssl-dev libxml2-dev libcairo2-dev python xorg-dev libxext-dev libxrender-dev #libxtst-dev xorg openbox x11-apps
 
 
 # Install RStudio from their repository
