@@ -1,3 +1,7 @@
+# use following command to mount docker container
+# docker run -d -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --publish=9000:8787 <container image name>
+# when BATMAN run complete, use dev.off() to close plot windows on server end.
+
 FROM r-base:latest
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
@@ -51,4 +55,3 @@ RUN chmod +x /usr/sbin/rstudio-server.sh
 EXPOSE 8787
 
 ENTRYPOINT ["/bin/sh","/usr/sbin/rstudio-server.sh"]
-
