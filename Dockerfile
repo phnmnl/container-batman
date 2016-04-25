@@ -1,6 +1,5 @@
 # use following command to mount docker container
 # docker run -d -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --publish=9000:8787 <container image name>
-# when BATMAN run complete, use dev.off() to close plot windows on server end.
 
 FROM r-base:latest
 
@@ -34,9 +33,10 @@ RUN rm /tmp/rstudio.deb
 ## install BATMAN dependencies
 RUN R -e "install.packages('doSNOW')"
 RUN R -e "install.packages('plotrix')"
+RUN R -e "install.packages('devtools')"
 
 ## install BATMAN packages in R
-RUN R -e "install.packages('batman', repos='http://R-Forge.R-project.org')"
+RUN R -e "require(devtools) && install_github('jianlianggao/docker-batman', subdir = 'batman')"
 
 
 ## A default user system configuration. Change user to be 'rstudio' (it is 'docker' in r-base by default)
@@ -55,3 +55,4 @@ RUN chmod +x /usr/sbin/rstudio-server.sh
 EXPOSE 8787
 
 ENTRYPOINT ["/bin/sh","/usr/sbin/rstudio-server.sh"]
+
