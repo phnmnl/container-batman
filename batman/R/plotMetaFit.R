@@ -1,5 +1,5 @@
 plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$outputDir, 
-                      prefixFig, rerun = FALSE, overwriteFig = FALSE, showPlot = TRUE)
+                      prefixFig, rerun = FALSE, overwriteFig = FALSE)
 {
   ## written by Dr. Jie Hao, Imperial College London
   ## plot metabolites fit posteriors with 95% credible Interval
@@ -11,7 +11,6 @@ plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$out
   ptype = "pdf"
   n <- 2
   ns<-5
-  pdfdev = FALSE
   
   if (missing(from))
     from = min(BM$sFit[1,1],BM$sFit[nrow(BM$sFit),1])
@@ -57,32 +56,19 @@ plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$out
             outpdf1 <- paste(saveFigDir, "/", prefixFig,"_spec_",sno[i],"to",sno[i+n-1],"_mFitSam_", metaName, ".",ptype, sep="")
           else
             outpdf1 <- paste(saveFigDir,"/spec_",sno[i],"to",sno[i+n-1],"_mFitSam_", metaName, ".",ptype, sep="")
+          #x11(15,7)
+          # replace by pdf device
+          pdf(outpdf1, width = 20, height = 15, pointsize = 20)
           
-          if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf1))))
-          {
-              pdf(outpdf1,15,7)  
-              pdfdev = TRUE
-          }         
-          else if (!showPlot && (file.exists(outpdf1) && !overwriteFig))
-            cat("Can't save figure, file", outpdf1, "already exists.\n")
-          else
-            x11(15,7)
           par(mfrow=c(n,1))  
         } else {
           if (!missing(prefixFig))
             outpdf1 <- paste(saveFigDir, "/", prefixFig, "_spec_",sno[i],"_mFitSam_", metaName, ".",ptype, sep="")
           else
             outpdf1 <- paste(saveFigDir,"/spec_",sno[i],"_mFitSam_", metaName, ".",ptype, sep="")
-          
-          if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf1))))
-          {
-              pdf(outpdf1,15,7)  
-              pdfdev = TRUE
-          }           
-          else if (!showPlot && (file.exists(outpdf1) && !overwriteFig))
-            cat("Can't save figure, file", outpdf1, "already exists.\n")
-          else
-            x11(15,7)
+          #x11(15,7)
+          # replace by pdf device
+          pdf(outpdf1, width = 20, height = 15, pointsize = 20)
         }
       } 
       v<-NULL
@@ -122,20 +108,11 @@ plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$out
              col = c("green", "black", "gray", "blue"), pt.cex=3, lty = c(1,4,4,1),lwd = c(3,3,3,3), cex = 0.8)
       ## save
       if ((length(sno) == i || !(i%%n)) && saveFig) {
-        if (pdfdev)
-        {
-          pdfoff = dev.off()    
-          pdfdev = FALSE
-        }
-        else if (showPlot && (file.exists(outpdf1) && !overwriteFig))
-          cat("Can't save figure, file", outpdf1, "already exists.\n")
-        else
-          df = dev.copy2pdf(device=x11, file = outpdf1)
-        
-        ## if (file.exists(outpdf1) && !overwriteFig)
-        ##   cat("Can't save figure, file", outpdf1, "already exists.\n")
-        ## else
-        ##    df = dev.copy2pdf(device=x11, file = outpdf1)
+        #if (file.exists(outpdf1) && !overwriteFig)
+        #  cat("Can't save figure, file", outpdf1, "already exists.\n")
+        #else
+        #  df = dev.copy2pdf(device=x11, file = outpdf1)
+        dev.off()
       }
     }
   }
@@ -156,32 +133,19 @@ plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$out
             outpdf2 <- paste(saveFigDir, "/", prefixFig,"_specRerun_",sno[i],"to",sno[i+n-1],"_mFitSam_", metaName, ".",ptype, sep="")
           else
             outpdf2 <- paste(saveFigDir,"/specRerun_",sno[i],"to",sno[i+n-1],"_mFitSam_", metaName, ".",ptype, sep="")
+          #x11(15,7)
+          # replace by pdf device
+          pdf(outpdf2, width = 20, height = 15, pointsize = 20)
           
-          if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf2))))
-          {
-              pdf(outpdf2,15,7)  
-              pdfdev = TRUE
-          }            
-          else if (!showPlot && (file.exists(outpdf2) && !overwriteFig))
-            cat("Can't save figure, file", outpdf2, "already exists.\n")
-          else
-            x11(15,7)
           par(mfrow=c(n,1))	
         } else {
           if (!missing(prefixFig))
             outpdf2 <- paste(saveFigDir, "/", prefixFig, "_specRerun_",sno[i],"_mFitSam_", metaName,".",ptype, sep="")
           else
             outpdf2 <- paste(saveFigDir,"/specRerun_",sno[i],"_mFitSam_", metaName,".",ptype, sep="")
-          
-          if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf2))))
-          {
-              pdf(outpdf2,15,7)  
-              pdfdev = TRUE
-          }          
-          else if (!showPlot && (file.exists(outpdf2) && !overwriteFig))
-            cat("Can't save figure, file", outpdf2, "already exists.\n")
-          else
-            x11(15,7)
+          #x11(15,7)
+          # replace by pdf device
+          pdf(outpdf2, width = 20, height = 15, pointsize = 20)
         }
       }     	
       v<-NULL
@@ -202,7 +166,7 @@ plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$out
       }
       if (length(((i-1)*ind+1):(i*ind))>1)
       {
-        v<-apply(metaFittemp, 1, quantile, probs = c(2.5,97.5)/100,  na.rm = TRUE, type = 3) 
+        v<-apply(metaFittemp, 1, quantile, probs = c(2.5,97.5)/100,  na.rm = TRUE, type =3) 
         v<-t(v)
       } else {
         v<-cbind(metaFittemp,metaFittemp)
@@ -218,20 +182,11 @@ plotMetaFit<-function(BM, from, to, metaName, saveFig = TRUE,saveFigDir = BM$out
       legend("topright", legend = c("Metabolite fit","2.5% quantiles", "97.5% quantiles", "Original Spectrum"),
              col = c("green", "black", "gray","blue"), pt.cex=3, lty = c(1,4, 4,1),lwd = c(3,3,3,3), cex = 0.8)
       if ((sno == i || !(i%%n)) && saveFig) {
-        if (pdfdev)
-        {
-          pdfoff = dev.off()    
-          pdfdev = FALSE
-        }       
-        else if (showPlot && (file.exists(outpdf2) && !overwriteFig))
-          cat("Can't save figure, file", outpdf2, "already exists.\n")
-        else
-          df = dev.copy2pdf(device=x11, file = outpdf2)
-        
         #if (file.exists(outpdf2) && !overwriteFig)
         #  cat("Can't save figure, file", outpdf2, "already exists.\n")
-        # else
+        #else
         #  df = dev.copy2pdf(device=x11, file = outpdf2)
+        dev.off()
       }
     }
   } else {

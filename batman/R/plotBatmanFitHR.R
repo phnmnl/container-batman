@@ -62,7 +62,9 @@ plotBatmanFitHR<-function(BM, xfrom, xto, yfrom, yto, metaName, saveFig = TRUE,
         outpdf1 <- paste(saveFigDir, "/", prefixFig,"_specFitHR_",jsno, "_",metaName,".",ptype, sep="")
       else
         outpdf1 <- paste(saveFigDir,"/specFitHR_",jsno, "_",metaName,".",ptype, sep="")
-      x11(15,7)
+      #x11(15,7)
+      # replace by pdf device
+      pdf(outpdf1, width = 20, height = 15, pointsize = 20)
       
       i = ns*(j-1)+1
       iH = nsH*(j-1)+1
@@ -100,10 +102,11 @@ plotBatmanFitHR<-function(BM, xfrom, xto, yfrom, yto, metaName, saveFig = TRUE,
                lty=c(1,-1,1,-1),lwd = c(rep(1,4)), cex = cex)
       }
       if (saveFig) {
-        if (file.exists(outpdf1) && !overwriteFig)
-          cat("Can't save figure, file", outpdf1, "already exists.\n")
-        else
-          df = dev.copy2pdf(device=x11, file = outpdf1)
+        #if (file.exists(outpdf1) && !overwriteFig)
+        #  cat("Can't save figure, file", outpdf1, "already exists.\n")
+        #else
+          #df = dev.copy2pdf(device=x11, file = outpdf1)
+        dev.off()
       }
     }
   }
@@ -117,7 +120,9 @@ plotBatmanFitHR<-function(BM, xfrom, xto, yfrom, yto, metaName, saveFig = TRUE,
         outpdf2 <- paste(saveFigDir, "/", prefixFig,"_specFitRerunHR_",jsno, "_",metaName,".",ptype, sep="")
       else
         outpdf2 <- paste(saveFigDir,"/specFitRerunHR_",jsno, "_",metaName,".",ptype, sep="")
-      x11(15,7)
+      #x11(15,7)
+      # replace by pdf device
+      pdf(outpdf2, width = 20, height = 15, pointsize = 20)
       
       i = ns*(j-1)+1
       iH = nsH*(j-1)+1
@@ -157,10 +162,11 @@ plotBatmanFitHR<-function(BM, xfrom, xto, yfrom, yto, metaName, saveFig = TRUE,
                lty=c(1,-1,1,-1),lwd = c(rep(1,4)), cex = cex)
       }
       if (saveFig) {
-        if (file.exists(outpdf2) && !overwriteFig)
-          cat("Can't save figure, file", outpdf2, "already exists.\n")
-        else
-          df = dev.copy2pdf(device=x11, file = outpdf2)
+        #if (file.exists(outpdf2) && !overwriteFig)
+        #  cat("Can't save figure, file", outpdf2, "already exists.\n")
+        #else
+        #  df = dev.copy2pdf(device=x11, file = outpdf2)
+        dev.off()
       }
     }
   } else {
