@@ -36,8 +36,11 @@ plotChemShiftDist<-function(BM, metaName, breaks = 20, xlim,
   
   for (i2 in 1:nMeta)
   {
-    x11()
+    #x11()
     outpdf1 <- paste(saveFigDir, "/chemShiftDist_", metaName[i2], ".pdf", sep="")  
+    # replace X11() by pdf device
+    pdf(outpdf1, width = 20, height = 15, pointsize = 20)
+    
     mid <- which(metaName[i2] == multiName1) 
     if (length(mid)>25) {
       cat("How many multiplets does", metaName[i2], "have? (Haven't program it to show more than 25)\n" )
@@ -61,10 +64,11 @@ plotChemShiftDist<-function(BM, metaName, breaks = 20, xlim,
     }
     if (saveFig) 
     {
-      if (file.exists(outpdf1) && !overwriteFig)
-        cat("Can't save figure, file", outpdf1, "already exists.\n")
-      else
-        df = dev.copy2pdf(device=x11, file = outpdf1)
+      #if (file.exists(outpdf1) && !overwriteFig)
+      #  cat("Can't save figure, file", outpdf1, "already exists.\n")
+      #else
+      #  df = dev.copy2pdf(device=x11, file = outpdf1)
+      dev.off()
     }
   }
 }

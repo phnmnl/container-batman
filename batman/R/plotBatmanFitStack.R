@@ -207,11 +207,17 @@ plotBatmanFitStack<-function(BM, offset = 1, mirroredWav = TRUE, specNo,  xfrom,
     else
       outpdf1 <- paste(saveFigDir,"/specFit_stack_",metaName,".",ptype, sep="")   
     if (tolower(orientation) == "l")
-      x11(20,15)      
+      #x11(20,15)  
+      # replace by pdf device
+      pdf(outpdf1, width = 20, height = 15, pointsize = 20)
     else if (tolower(orientation) == "p")
-      x11(5,5)
+      #x11(5,5)
+      # replace by pdf device
+      pdf(outpdf1, width = 5, height = 5, pointsize = 20)
     else
-      x11()
+      #x11()
+      # replace by pdf device
+      pdf(outpdf1, width = 20, height = 15, pointsize = 20)
     
     for (j in 1:length(sno))
     {
@@ -368,12 +374,13 @@ plotBatmanFitStack<-function(BM, offset = 1, mirroredWav = TRUE, specNo,  xfrom,
     }   
     if (saveFig)
     {
-      if (file.exists(outpdf1) && !overwriteFig)
-      {
-        cat("Can't save figure, file", outpdf1, "already exists.\n")
-      } else {
-        df = dev.copy2pdf(device=x11, file = outpdf1)
-      }
+      #if (file.exists(outpdf1) && !overwriteFig)
+      #{
+      #  cat("Can't save figure, file", outpdf1, "already exists.\n")
+      #} else {
+      #  df = dev.copy2pdf(device=x11, file = outpdf1)
+      #}
+      dev.off()
     }
   }
   ## plot batman rerun results
@@ -405,7 +412,10 @@ plotBatmanFitStack<-function(BM, offset = 1, mirroredWav = TRUE, specNo,  xfrom,
       outpdf2 <- paste(saveFigDir, "/", prefixFig,"_specfitRerun_stack_", metaName,".",ptype, sep="")
     else
       outpdf2 <- paste(saveFigDir,"/specfitRerun_stack_", metaName,".",ptype, sep="")
-    x11()
+    #x11()
+    # replace by pdf device
+    pdf(outpdf2, width = 20, height = 15, pointsize = 20)
+    
     
     for (j in 1:length(sno))
     {
@@ -566,12 +576,13 @@ plotBatmanFitStack<-function(BM, offset = 1, mirroredWav = TRUE, specNo,  xfrom,
     ## save plot
     if (saveFig)
     {
-      if (file.exists(outpdf2) && !(overwriteFig))
-      {    
-        cat("Can't save figure, file", outpdf2, "already exists.\n")
-      } else {
-        df = dev.copy2pdf(device=x11, file = outpdf2)
-      }
+      #if (file.exists(outpdf2) && !(overwriteFig))
+      #{    
+      #  cat("Can't save figure, file", outpdf2, "already exists.\n")
+      #} else {
+      #  df = dev.copy2pdf(device=x11, file = outpdf2)
+      #}
+      dev.off()
     }
   } else {
     cat("No results found.\n")

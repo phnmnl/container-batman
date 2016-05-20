@@ -107,11 +107,13 @@ plotDiagnosticScatter <- function(BM, binWidth = 0.018, cexID = 0.5, saveFig = T
   
   for (i2 in 1:nMeta)
   {
-    x11()
+    #x11()
     if (!missing(prefixFig))
       outpdf1 <- paste(saveFigDir, "/", prefixFig,"_diagScatter_", metaName2[i2], rerunString,,".",ptype, sep="")
     else
       outpdf1 <- paste(saveFigDir,"/diagScatter_", metaName2[i2], rerunString,".",ptype, sep="")
+    # replace X11() by pdf device
+    pdf(outpdf1, width = 20, height = 15, pointsize = 20)
     
     mid <- which(metaName2[i2] == multiName2) 
     if (length(mid) <5)
@@ -162,12 +164,13 @@ plotDiagnosticScatter <- function(BM, binWidth = 0.018, cexID = 0.5, saveFig = T
     }
     if (saveFig)
     {
-      if (file.exists(outpdf1) && !(overwriteFig))
-      { 
-        cat("Can't save figure, file", outpdf1, "already exists.\n")
-      } else {
-        df = dev.copy2pdf(device=x11, file = outpdf1)
-      }
+      #if (file.exists(outpdf1) && !(overwriteFig))
+      #{ 
+      #  cat("Can't save figure, file", outpdf1, "already exists.\n")
+      #} else {
+      #  df = dev.copy2pdf(device=x11, file = outpdf1)
+      #}
+      dev.off()
     }
   }
   warnRead<-options(warn = warnDef)
