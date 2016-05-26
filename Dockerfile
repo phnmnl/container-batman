@@ -25,12 +25,11 @@ RUN rm -rf /var/lib/apt/lists/ \
   && rm -rf /var/lib/apt/lists/
 
 ## install BATMAN dependencies
-RUN R -e "install.packages('doSNOW')"
-RUN R -e "install.packages('plotrix')"
-RUN R -e "install.packages('devtools')"
+RUN echo 'install.packages(c("doSNOW","plotrix","devtools"))' > /install_batman.R
+RUN echo 'library(devtools)' >> /install_batman.R
+RUN echo 'install_github("jianlianggao/docker-batman/batman")' >> /install_batman.R
 
-## install BATMAN packages in R
-RUN R -e "require(devtools) && install_github('jianlianggao/docker-batman', subdir = 'batman')"
+RUN Rscript /install_batman.R
 
 ## Port number
 EXPOSE 8787
