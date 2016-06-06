@@ -1,5 +1,8 @@
 # use following command to mount docker container
-# docker run -d -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --publish=9000:8787 <container image name>
+# docker run -d -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --publish=<port number, e.g., 9000>:8787 <container image name>
+# using loop to mount the docker image to multi ports
+# for example:
+#    for i in {9000..9020}; do docker run -d -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --publish=$i:8787 <container image name>; done
 
 FROM r-base:latest
 
