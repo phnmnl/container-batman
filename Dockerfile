@@ -7,7 +7,7 @@ FROM r-base:latest
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
 ## Add /usr/local/bin to PATH
-ENV PATH ~/batman/:$PATH
+ENV PATH /usr/local/bin/:$PATH
 
 ## Download and install RStudio dependencies
 RUN rm -rf /var/lib/apt/lists/ \
@@ -30,10 +30,10 @@ RUN echo 'install_github("jianlianggao/docker-batman/batman")' >> /install_batma
 RUN Rscript /install_batman.R
 
 ## copy runBATMAN.r into /usr/local/bin folder
-COPY runBATMAN.r ~/batman
+COPY runBATMAN.r /usr/local/bin
 
 ## Port number
 EXPOSE 8787
 
-ENTRYPOINT ["~/batman/runBATMAN.r", "-i", "$1", "-o", "$2", "-p", "$3", "-u", "$4", "-l", "$5"]
+ENTRYPOINT ["/usr/local/bin/runBATMAN.r", "-i", "$1", "-o", "$2", "-p", "$3", "-u", "$4", "-l", "$5"]
 
