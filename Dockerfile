@@ -6,10 +6,8 @@ FROM r-base:latest
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
-##LABEL Description="RStudio Server + BATMAN Docker container"
-
-## Add RStudio binaries to PATH
-ENV PATH /usr/lib/rstudio-server/bin/:$PATH
+## Add /usr/local/bin to PATH
+ENV PATH ~/batman/:$PATH
 
 ## Download and install RStudio dependencies
 RUN rm -rf /var/lib/apt/lists/ \
@@ -31,8 +29,11 @@ RUN echo 'install_github("jianlianggao/docker-batman/batman")' >> /install_batma
 
 RUN Rscript /install_batman.R
 
+## copy runBATMAN.r into /usr/local/bin folder
+COPY runBATMAN.r ~/batman
+
 ## Port number
 EXPOSE 8787
 
-CMD ["R"]
+ENTRYPOINT ["~/batman/runBATMAN.r", "-i", "$1", "-o", "$2", "-p", "$3", "-u", "$4", "-l", "$5"]
 
