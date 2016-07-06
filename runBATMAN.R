@@ -53,8 +53,16 @@ replaceBSlash<-function(paths)
    }
 }
 
-opt$inputData<-replaceBSlash(opt$inputData)
-opt$output<-replaceBSlash(opt$output)
+if (is.null(opt$inputData)) {
+  print("using default trial data set.")
+} else {
+  opt$inputData<-replaceBSlash(opt$inputData) 
+}
+if (is.null(opt$output)) {
+  print("using default output directory.")
+} else {
+  opt$output<-replaceBSlash(opt$output)
+}
 
 ## copy the options, metabolites template and list to the BATMAN
 ## input folder is the files are provided
