@@ -100,11 +100,16 @@ if (dir.exists(batmanInputDir)) {
 
 ## Run BATMAN
 library(batman)
-bm<-batman(txtFile=opt$inputData)
-## Read BATMAN results path
-resultsDir<-paste(bm$outputDir)
-## Copy BATMAN results to the specified folder
-list.of.files<-list.files(resultsDir, full.names=TRUE)
-file.copy(list.of.files,opt$output)
+if (is.null(opt$inputData) & is.null(opt$output) ) {
+  bm <-batman()
+} else {
+  bm<-batman(txtFile=opt$inputData)
+  ## Read BATMAN results path
+  resultsDir<-paste(bm$outputDir)
+
+  ## Copy BATMAN results to the specified folder
+  list.of.files<-list.files(resultsDir, full.names=TRUE)
+  file.copy(list.of.files,opt$output)
+}
 
 q(save="no")
