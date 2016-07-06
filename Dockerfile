@@ -35,8 +35,8 @@ COPY runBATMAN.r /usr/local/bin
 ## Make sure runBATMAN.r is executable
 RUN chmod a+x /usr/local/bin/runBATMAN.r
 
-## Port number
-EXPOSE 8787
+## Port number -- probably legacy of the RStudio version -- you don't need to expose any ports for this functionality.
+## EXPOSE 8787
 
 ## Arguments are not needed in the ENTRYPOINT, only the executable, which given that it is in the path,
 ## doesn't need to be given with the absolute path.
