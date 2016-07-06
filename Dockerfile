@@ -6,8 +6,8 @@ FROM r-base:latest
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
-## Add /usr/local/bin to PATH
-ENV PATH /usr/local/bin/:$PATH
+## Add /usr/local/bin to PATH -- you can delete this, /usr/local/bin is normally in the PATH
+## ENV PATH /usr/local/bin/:$PATH
 
 ## Download and install RStudio dependencies
 RUN rm -rf /var/lib/apt/lists/ \
@@ -32,8 +32,13 @@ RUN Rscript /install_batman.R
 ## copy runBATMAN.r into /usr/local/bin folder
 COPY runBATMAN.r /usr/local/bin
 
-## Port number
-EXPOSE 8787
+## Make sure runBATMAN.r is executable
+RUN chmod a+x /usr/local/bin/runBATMAN.r
 
-ENTRYPOINT ["/usr/local/bin/runBATMAN.r", "-i", "$1", "-o", "$2", "-p", "$3", "-u", "$4", "-l", "$5"]
+## Port number -- probably legacy of the RStudio version -- you don't need to expose any ports for this functionality.
+## EXPOSE 8787
+
+## Arguments are not needed in the ENTRYPOINT, only the executable, which given that it is in the path,
+## doesn't need to be given with the absolute path.
+ENTRYPOINT ["runBATMAN.r"]
 
