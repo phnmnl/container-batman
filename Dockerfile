@@ -30,15 +30,15 @@ RUN echo 'install_github("jianlianggao/docker-batman/batman")' >> /install_batma
 RUN Rscript /install_batman.R
 
 ## copy runBATMAN.r into /usr/local/bin folder
-COPY runBATMAN.r /usr/local/bin
+COPY runBATMAN.R /usr/local/bin
 
 ## Make sure runBATMAN.r is executable
-RUN chmod a+x /usr/local/bin/runBATMAN.r
+RUN chmod a+x /usr/local/bin/runBATMAN.R
 
 ## Port number -- probably legacy of the RStudio version -- you don't need to expose any ports for this functionality.
 ## EXPOSE 8787
 
 ## Arguments are not needed in the ENTRYPOINT, only the executable, which given that it is in the path,
 ## doesn't need to be given with the absolute path.
-ENTRYPOINT ["runBATMAN.r"]
+ENTRYPOINT ["runBATMAN.R"]
 
