@@ -6,8 +6,8 @@ FROM r-base:latest
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
-## Add /usr/local/bin to PATH
-ENV PATH /usr/local/bin/:$PATH
+## Add /usr/local/bin to PATH -- you can delete this, /usr/local/bin is normally in the PATH
+## ENV PATH /usr/local/bin/:$PATH
 
 ## Download and install RStudio dependencies
 RUN rm -rf /var/lib/apt/lists/ \
@@ -31,6 +31,9 @@ RUN Rscript /install_batman.R
 
 ## copy runBATMAN.r into /usr/local/bin folder
 COPY runBATMAN.r /usr/local/bin
+
+## Make sure runBATMAN.r is executable
+RUN chmod a+x runBATMAN.r
 
 ## Port number
 EXPOSE 8787
