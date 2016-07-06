@@ -33,10 +33,12 @@ RUN Rscript /install_batman.R
 COPY runBATMAN.r /usr/local/bin
 
 ## Make sure runBATMAN.r is executable
-RUN chmod a+x runBATMAN.r
+RUN chmod a+x /usr/local/bin/runBATMAN.r
 
 ## Port number
 EXPOSE 8787
 
-ENTRYPOINT ["/usr/local/bin/runBATMAN.r", "-i", "$1", "-o", "$2", "-p", "$3", "-u", "$4", "-l", "$5"]
+## Arguments are not needed in the ENTRYPOINT, only the executable, which given that it is in the path,
+## doesn't need to be given with the absolute path.
+ENTRYPOINT ["runBATMAN.r"]
 
