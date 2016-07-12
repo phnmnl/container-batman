@@ -8,16 +8,29 @@ suppressPackageStartupMessages(library("optparse"))
 ## make_option(c("-h", "--help"), action="store_true", default=FALSE,
 ## help="Show this help message and exit")
 option_list <- list(
-   make_option(c("-i", "--inputData"), help="Full path to the input NMR spectra data"),
-   make_option(c("-o", "--output"), help="Export BATMAN results to your specified folder"),
-   make_option(c("-p", "--batOptions"), help="Upload BATMAN options, if there is no this option, using the default BATMAN options"),
-   make_option(c("-u", "--multiData"), help="Upload user's metabolites template, if there is no this option, using the default template"),
-   make_option(c("-l", "--metaList"), help="Upload a list of wanted metabolites, if there is no this option, using the default metabolites list")
+   make_option(c("-i", "--inputData"), 
+               help="Full path to the input NMR spectra data, required."),
+   make_option(c("-o", "--output"), 
+               help="[Export BATMAN results to your specified folder, defaults to current working directory.]", 
+               default = getwd()),
+   make_option(c("-p", "--batOptions"), 
+               help="[BATMAN options, default available internally]"),
+   make_option(c("-u", "--multiData"), 
+               help="[User's metabolites template, defaults to an internal template.]"),
+   make_option(c("-l", "--metaList"), 
+               help="[List of wanted metabolites, defaults to an internal metabolites list.]")
 )
 
 # get command line options, if help option encountered print help and exit,
 # otherwise if options not found on command line then set defaults,
-opt <- parse_args(OptionParser(option_list=option_list))
+parser <- OptionParser(option_list=option_list)
+opt <- parse_args(parser)
+
+if(!("inputData" %in% opt)) {
+  print("no input argument given!")
+  print_help(parser)
+  q(status = 1,save = "no")
+}
 
 ## function of replacing "\" to "/" because "\" is interpreted as "\\" 
 ## parsing the arguments
