@@ -76,7 +76,8 @@ if ("metaList" %in% names(opt)) {
   print("using default BATMAN metabolites list")
 }
 
-batmanInputDir<-paste(getwd(), "/runBATMAN/BatmanInput", sep="")
+batmanInputDir<-paste(opt$output, "/runBATMAN/BatmanInput", sep="")
+dir.create(batmanInputDir)
 if (dir.exists(batmanInputDir)) {
    if (!is.null(opt$batOptions)) {
       file.copy(opt$batOptions, batmanInputDir, overwrite = TRUE)
@@ -94,13 +95,9 @@ library(batman)
 if (is.null(opt$inputData) & is.null(opt$output) ) {
   bm <-batman()
 } else {
-  bm<-batman(txtFile=opt$inputData)
+  bm<-batman(txtFile=opt$inputData, runBATMANDir=opt$output)
   ## Read BATMAN results path
   resultsDir<-paste(bm$outputDir)
-
-  ## Copy BATMAN results to the specified folder
-  list.of.files<-list.files(resultsDir, full.names=TRUE)
-  file.copy(list.of.files,opt$output)
 }
 
 q(save="no")
