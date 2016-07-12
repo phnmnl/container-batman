@@ -117,6 +117,9 @@ if (is.null(opt$inputData) & is.null(opt$output) ) {
   bm <-batman()
 } else {
   bm<-batman(txtFile=opt$inputData, runBATMANDir=opt$output)
-  ## Read BATMAN results path
-  resultsDir<-paste(bm$outputDir)
+  ## Create link to simplify results obtention for tools like 
+  ## Galaxy.
+  resultsDir<-paste(opt$output,"results",sep="/")
+  file.remove(resultsDir)
+  file.symlink(bm$output,resultsDir)
 }
