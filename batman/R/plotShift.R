@@ -1,5 +1,5 @@
 plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, saveFig = TRUE, 
-                    saveFigDir = BM$outputDir, prefixFig, overwriteFig = FALSE)
+                    saveFigDir = BM$outputDir, prefixFig, overwriteFig = FALSE, showPlot = TRUE)
 { 
   ## written by Dr. Jie Hao, Imperial College London
   ## plot multiplet shift posteriors in boxplot or histogram
@@ -8,6 +8,7 @@ plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, sav
   warnDef<-options("warn")$warn
   warnRead<-options(warn = -1)
   ptype = "pdf"
+  pdfdev = FALSE
   mName<-NULL  ## metabolites names
   mValue<-NULL   ## corresponding ppm values
   mLabel<-NULL    ## label to be shown in plot
@@ -60,10 +61,15 @@ plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, sav
         else
           outpdf1 <- paste(saveFigDir,"/spec_",isno, "_",metaName,"_ppmShift.",ptype, sep="")
         #if (!is.null(metaName))
-        #x11()
-        # replace by pdf device
-        pdf(outpdf1, width = 20, height = 15, pointsize = 20)
-        
+        if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf1))))
+        {
+          pdf(outpdf1)  
+          pdfdev = TRUE
+        }               
+        else if (!showPlot && (file.exists(outpdf1) && !overwriteFig))
+          cat("Can't save figure, file", outpdf1, "already exists.\n")
+        else
+          x11()
         if (missing(breaks))
         {
           breaks <- length(BM$deltaSam[,1])%/%3
@@ -136,11 +142,20 @@ plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, sav
         }
         if (saveFig) 
         {
-          #if (file.exists(outpdf1) && !overwriteFig)
-          #  cat("Can't save figure, file", outpdf1, "already exists.\n")
-          #else
-          #  df = dev.copy2pdf(device=x11, file = outpdf1)
-          dev.off()
+          if (pdfdev)
+          {
+            pdfoff = dev.off()    
+            pdfdev = FALSE
+          }
+          else if (showPlot && (file.exists(outpdf1) && !overwriteFig))
+            cat("Can't save figure, file", outpdf1, "already exists.\n")
+          else
+            df = dev.copy2pdf(device=x11, file = outpdf1)
+          
+          ##if (file.exists(outpdf1) && !overwriteFig)
+          ##  cat("Can't save figure, file", outpdf1, "already exists.\n")
+          ## else
+          ##  df = dev.copy2pdf(device=x11, file = outpdf1)
         }
       }
     } else {
@@ -160,9 +175,15 @@ plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, sav
           outpdf1 <- paste(saveFigDir, "/", prefixFig,"_",mLab[j],"_ppmShift.",ptype, sep="")
         else
           outpdf1 <- paste(saveFigDir,"/",mLab[j],"_ppmShift.",ptype, sep="") 
-        #x11(15,7)
-        # replace X11(15,7) by pdf device
-        pdf(outpdf1, width = 20, height = 15, pointsize = 20)
+        if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf1))))
+        {
+          pdf(outpdf1,15,7)  
+          pdfdev = TRUE
+        }              
+        else if (!showPlot && (file.exists(outpdf1) && !overwriteFig))
+          cat("Can't save figure, file", outpdf1, "already exists.\n")
+        else
+          x11(15,7)
         
         if (missing(breaks))
         {
@@ -190,7 +211,7 @@ plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, sav
                    main = paste("NMR Spectrum ",isno,": ", BM$specTitle[2,i], sep=""),
                    xlab = "ppm shift", breaks = breaks,prob=TRUE)
               lines(density(BM$deltaSam[,mind[((i-1)*ind2+1)+j-1]]))             
-              v<-quantile(BM$deltaSam[,mind[((i-1)*ind2+1)+j-1]],p = c(2.5,97.5)/100, ttype = 3)
+              v<-quantile(BM$deltaSam[,mind[((i-1)*ind2+1)+j-1]],p = c(2.5,97.5)/100, type = 3)
               abline(v = v, col = "red", lty=2, lwd = 2)      
               legend("topright", legend = "2.5% & 97.5% quantiles",
                      col = "red", pt.cex=2, lty =  2, cex = 0.8)
@@ -241,11 +262,20 @@ plotShift<-function(BM, metaName, plotHist = FALSE, breaks, perMult = FALSE, sav
         #title(main = list(paste("ppm shift\nNMR Spectrum ",i,": ", BM$specTitle[2,i], sep=""),cex=1.5,font=3), outer=TRUE)                  
         if (saveFig) 
         {
+          if (pdfdev)
+          {
+            pdfoff = dev.off()
+            pdfdev = FALSE
+          }
+          else if (showPlot && (file.exists(outpdf1) && !overwriteFig))
+            cat("Can't save figure, file", outpdf1, "already exists.\n")
+          else
+            df = dev.copy2pdf(device=x11, file = outpdf1)
+          
           #if (file.exists(outpdf1) && !overwriteFig)
           #  cat("Can't save figure, file", outpdf1, "already exists.\n")
           #else
           #  df = dev.copy2pdf(device=x11, file = outpdf1)
-          dev.off()
         }
       }
     }

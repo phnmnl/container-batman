@@ -1,12 +1,13 @@
 plotChemShiftDist<-function(BM, metaName, breaks = 20, xlim, 
                             saveFig = TRUE, saveFigDir = BM$outputDir,
-                            prefixFig, overwriteFig = FALSE)
+                            prefixFig, overwriteFig = FALSE, showPlot = TRUE)
 {
   ## written by Dr. Jie Hao, Imperial College London
   ## Histogram of the mean posterior estimated chemical shifts for the multiplets of  
   ## a given metabolite across a series of spectra. 
   
   setxlim <- FALSE
+  pdfdev = FALSE
   
   if (!missing(xlim))
   {
@@ -36,10 +37,16 @@ plotChemShiftDist<-function(BM, metaName, breaks = 20, xlim,
   
   for (i2 in 1:nMeta)
   {
-    #x11()
     outpdf1 <- paste(saveFigDir, "/chemShiftDist_", metaName[i2], ".pdf", sep="")  
-    # replace X11() by pdf device
-    pdf(outpdf1, width = 20, height = 15, pointsize = 20)
+    if ((!showPlot && overwriteFig) || (!showPlot && (!file.exists(outpdf1))))
+    {
+      pdf(outpdf1)  
+      pdfdev = TRUE
+    }        
+    else if (!showPlot && (file.exists(outpdf1) && !overwriteFig))
+      cat("Can't save figure, file", outpdf1, "already exists.\n")
+    else
+      x11()
     
     mid <- which(metaName[i2] == multiName1) 
     if (length(mid)>25) {
@@ -64,11 +71,20 @@ plotChemShiftDist<-function(BM, metaName, breaks = 20, xlim,
     }
     if (saveFig) 
     {
-      #if (file.exists(outpdf1) && !overwriteFig)
-      #  cat("Can't save figure, file", outpdf1, "already exists.\n")
-      #else
-      #  df = dev.copy2pdf(device=x11, file = outpdf1)
-      dev.off()
+      if (pdfdev)
+      {
+        pdfoff = dev.off()    
+        pdfdev = FALSE
+      }
+      else if (showPlot && (file.exists(outpdf1) && !overwriteFig))
+        cat("Can't save figure, file", outpdf1, "already exists.\n")
+      else
+        df = dev.copy2pdf(device=x11, file = outpdf1)
+      
+      ## if (file.exists(outpdf1) && !overwriteFig)
+      ##   cat("Can't save figure, file", outpdf1, "already exists.\n")
+      ## else
+      ##   df = dev.copy2pdf(device=x11, file = outpdf1)
     }
   }
 }

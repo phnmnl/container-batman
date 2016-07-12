@@ -661,7 +661,7 @@ readBatmanOutput<-function(dirOP, dirIP,readMetaIndFitSam = TRUE,
           vA<-cbind(vA,vAll)
       }   
       vA2<-vA
-      percentage<-c('2.5%','97.5%') #<-names(vA2)
+      percentage<-c('2.5%','97.5%')
       Metabolite<-rep(t(specTitle[2,]),each=2)
       vA2<-rbind(Metabolite,percentage,vA2)
       row.names(vA2)<-c("Metabolite", "Percentage",row.names(bet))
@@ -699,7 +699,7 @@ readBatmanOutput<-function(dirOP, dirIP,readMetaIndFitSam = TRUE,
           vArr<-cbind(vArr,vAllrr)
       }   
       vArr2<-vArr
-      percentage<-c('2.5%','97.5%') #names(vArr2)
+      percentage<-c('2.5%','97.5%')
       Metabolite<-rep(t(specTitle[2,]),each=2)
       vArr2<-rbind(Metabolite,percentage,vArr2)
       row.names(vArr2)<-c("Metabolite", "Percentage",row.names(bet))

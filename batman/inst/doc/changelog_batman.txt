@@ -79,4 +79,14 @@ batman 1.2.1.02 (released 19-07-2014)
 	1	updated read.table usage with extra parameter (colClasses="numeric")
 batman 1.2.1.03 (released 24-10-2014)
 	1	fixed bug with reading in txtFile input.
+batman 1.2.1.04 (released 26-12-2015)
+	1	fixed bug with saving posterior samples in output.
+batman 1.2.1.05 (released 25-04-2016)
+	1	added 'showPlot' option for plot functions for when running on a cloud/cluster.
+batman 1.2.1.06 (released 28-04-2016)
+	1	fixed bug when nItPostBurnin = 2000*n, problem with quantile default setting in R.
+batman 1.2.1.07 (released 28-04-2016)
+	1	No plot will be shown if running non win, linux or osx systems.
+	2	makeCluster getClusterOption("type")
+
 
