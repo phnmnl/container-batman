@@ -26,7 +26,7 @@ option_list <- list(
 parser <- OptionParser(option_list=option_list)
 opt <- parse_args(parser)
 
-if(!("inputData" %in% opt)) {
+if(!("inputData" %in% names(opt))) {
   print("no input argument given!")
   print_help(parser)
   q(status = 1,save = "no")
