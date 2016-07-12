@@ -1,14 +1,5 @@
 #!/usr/bin/env Rscript
 
-## check if "optparse" is installed
-package_installed<-require("optparse")
-print(package_installed)
-## install the package "optparse" if it wasn't installed.
-if (!package_installed)
-{
-   install.packages("optparse", repos="http://cran.us.r-project.org")
-}
-
 ## import optparse library
 suppressPackageStartupMessages(library("optparse"))
 
@@ -67,22 +58,22 @@ if (is.null(opt$output)) {
 ## copy the options, metabolites template and list to the BATMAN
 ## input folder is the files are provided
 
-if (is.null(opt$batOptions)) {
-   print("using default BATMAN options")
+if ("batOptions" %in% names(opt)) {
+  opt$batOptions<-replaceBSlash(opt$batOptions)
 } else {
-   opt$batOptions<-replaceBSlash(opt$batOptions)
+  print("using default BATMAN options")
 }
 
-if (is.null(opt$multiData)) {
-   print("using default BATMAN metabolites template")
+if ("multiData" %in% names(opt)) {
+  opt$multiData<-replaceBSlash(opt$multiData)
 } else {
-   opt$multiData<-replaceBSlash(opt$multiData)
+  print("using default BATMAN metabolites template")
 }
 
-if (is.null(opt$metaList)) {
-   print("using default BATMAN metabolites list")
+if ("metaList" %in% names(opt)) {
+  opt$metaList<-replaceBSlash(opt$metaList)
 } else {
-   opt$metaList<-replaceBSlash(opt$metaList)
+  print("using default BATMAN metabolites list")
 }
 
 batmanInputDir<-paste(getwd(), "/runBATMAN/BatmanInput", sep="")
