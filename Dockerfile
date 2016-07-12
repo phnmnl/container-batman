@@ -23,7 +23,7 @@ RUN rm -rf /var/lib/apt/lists/ \
   && rm -rf /var/lib/apt/lists/
 
 ## install BATMAN dependencies
-RUN echo 'install.packages(c("doSNOW","plotrix","devtools"))' > /install_batman.R
+RUN echo 'install.packages(c("doSNOW","plotrix","devtools","optparse"))' > /install_batman.R
 RUN echo 'library(devtools)' >> /install_batman.R
 RUN echo 'install_github("jianlianggao/docker-batman/batman")' >> /install_batman.R
 

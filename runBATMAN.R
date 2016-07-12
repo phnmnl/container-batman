@@ -1,14 +1,5 @@
 #!/usr/bin/env Rscript
 
-## check if "optparse" is installed
-package_installed<-require("optparse")
-print(package_installed)
-## install the package "optparse" if it wasn't installed.
-if (!package_installed)
-{
-   install.packages("optparse", repos="http://cran.us.r-project.org")
-}
-
 ## import optparse library
 suppressPackageStartupMessages(library("optparse"))
 
