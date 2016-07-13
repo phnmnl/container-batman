@@ -53,8 +53,16 @@ replaceBSlash<-function(paths)
    }
 }
 
-opt$inputData<-replaceBSlash(opt$inputData)
-opt$output<-replaceBSlash(opt$output)
+if (is.null(opt$inputData)) {
+  print("using default trial data set.")
+} else {
+  opt$inputData<-replaceBSlash(opt$inputData) 
+}
+if (is.null(opt$output)) {
+  print("using default output directory.")
+} else {
+  opt$output<-replaceBSlash(opt$output)
+}
 
 ## copy the options, metabolites template and list to the BATMAN
 ## input folder is the files are provided
@@ -92,11 +100,16 @@ if (dir.exists(batmanInputDir)) {
 
 ## Run BATMAN
 library(batman)
-bm<-batman(txtFile=opt$inputData)
-## Read BATMAN results path
-resultsDir<-paste(bm$outputDir)
-## Copy BATMAN results to the specified folder
-list.of.files<-list.files(resultsDir, full.names=TRUE)
-file.copy(list.of.files,opt$output)
+if (is.null(opt$inputData) & is.null(opt$output) ) {
+  bm <-batman()
+} else {
+  bm<-batman(txtFile=opt$inputData)
+  ## Read BATMAN results path
+  resultsDir<-paste(bm$outputDir)
+
+  ## Copy BATMAN results to the specified folder
+  list.of.files<-list.files(resultsDir, full.names=TRUE)
+  file.copy(list.of.files,opt$output)
+}
 
 q(save="no")
