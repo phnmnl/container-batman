@@ -24,23 +24,6 @@ runBATMAN.R -i ${nmr_spectra_input}
          <param name="target_metabolites" type="data" format="txt" label="target metabolites list"/>
      </inputs>
      <outputs>
-         <!--
-         <data format="txt" name="out">
-             <discover_datasets pattern="__designation_and_ext__" directory="results/L" visible="true"/>
-             <discover_datasets pattern="__designation_and_ext__" directory="results/NMRdata_mod" visible="true"/>
-             <discover_datasets pattern="__designation_and_ext__" directory="results" visible="true"/>
-         </data>
-         ;
-mkdir -p results/L && mv results/L_*.txt results/L/;
-mkdir -p results/NMRdata_mod && mv results/NMRdata_mod_*.txt results/NMRdata_mod/;
-mkdir -p results/beta_rr && mv results/beta_*_rr_0.txt results/beta_rr/;
-
-         -->
-         <!--
-         <data format="txt" name="out">
-             <discover_datasets pattern="(?P&lt;designation&gt;.+)\.pdf" directory="results" visible="true" />
-         </data>
-         -->
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
          <collection name="spectra" type="list" labels="Stack from ${on_string}">
              <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
