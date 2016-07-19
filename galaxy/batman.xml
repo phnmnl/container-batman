@@ -1,0 +1,53 @@
+<tool id="batman-nmr" name="BATMAN">
+     <description>BATMAN</description>
+     <requirements>
+       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/batman</container>
+     </requirements>
+     <command><![CDATA[
+runBATMAN.R -i ${nmr_spectra_input}
+            -o \$PWD
+#if str( $options_file ) != None:
+            -p ${options_file}
+#end if
+#if str( $metabolite_template ) != None:
+            -u ${metabolite_template}
+#end if
+#if str( $target_metabolites ) != None:
+            -l ${target_metabolites}
+#end if
+       ]]>
+     </command>
+     <inputs>
+         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset"/>
+         <param name="options_file" type="data" format="txt" label="BATMAN options"/>
+         <param name="metabolite_template" type="data" format="txt" label="pre-defined metabolites template, multi_data_user.csv"/>
+         <param name="target_metabolites" type="data" format="txt" label="target metabolites list"/>
+     </inputs>
+     <outputs>
+         <!--
+         <data format="txt" name="out">
+             <discover_datasets pattern="__designation_and_ext__" directory="results/L" visible="true"/>
+             <discover_datasets pattern="__designation_and_ext__" directory="results/NMRdata_mod" visible="true"/>
+             <discover_datasets pattern="__designation_and_ext__" directory="results" visible="true"/>
+         </data>
+         ;
+mkdir -p results/L && mv results/L_*.txt results/L/;
+mkdir -p results/NMRdata_mod && mv results/NMRdata_mod_*.txt results/NMRdata_mod/;
+mkdir -p results/beta_rr && mv results/beta_*_rr_0.txt results/beta_rr/;
+
+         -->
+         <!--
+         <data format="txt" name="out">
+             <discover_datasets pattern="(?P&lt;designation&gt;.+)\.pdf" directory="results" visible="true" />
+         </data>
+         -->
+         <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
+         <collection name="spectra" type="list" labels="Stack from ${on_string}">
+             <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;L_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;L_.+)\.txt$" ext="tabular" directory="results" />
+         </collection>
+     </outputs>
+     <help>
+     </help>
+ </tool>
