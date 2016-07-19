@@ -25,6 +25,9 @@ runBATMAN.R -i ${nmr_spectra_input}
      </inputs>
      <outputs>
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
+         <data name="MultipletsPpmShifts" format="tabular" from_work_dir="results/MultipletsPpmShifts.txt" label="Multiplets PPM Shifts"/>
+         <data name="RelConCreInt" format="tabular" from_work_dir="results/RelConCreInt.txt" label="Relative concentrations ?"/>
+
          <collection name="spectra" type="list" labels="Stack from ${on_string}">
              <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
              <discover_datasets pattern="(?P&lt;name&gt;L_.+)\.txt$" ext="tabular" directory="results" />
