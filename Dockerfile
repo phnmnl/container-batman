@@ -7,11 +7,8 @@ RUN apt-get -y update
 
 # Install dependencies
 RUN apt-get -y --no-install-recommends install \
-	libapparmor-dev \
-	libedit-dev \
 	libcurl4-openssl-dev \
-	libssl-dev \
-	psmisc
+	libssl-dev
 RUN apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/{cache,log}/ /tmp/* /var/tmp/*
 
 # Install BATMAN dependencies
