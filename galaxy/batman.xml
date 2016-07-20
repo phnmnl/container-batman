@@ -36,6 +36,11 @@ runBATMAN.R -i ${nmr_spectra_input}
              <discover_datasets pattern="(?P&lt;name&gt;beta_.+_rr_0)\.txt$" ext="tabular" directory="results" />
              <discover_datasets pattern="(?P&lt;name&gt;delta_draw_mean_.+)\.txt$" ext="tabular" directory="results" />
              <discover_datasets pattern="(?P&lt;name&gt;delta_sam_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;lambda_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaFit_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaIndFit_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaTempHR_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaTemp_.+_rr_0)\.txt$" ext="tabular" directory="results" />
          </collection>
      </outputs>
      <help>
