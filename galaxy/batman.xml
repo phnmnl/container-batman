@@ -31,7 +31,11 @@ runBATMAN.R -i ${nmr_spectra_input}
          <collection name="spectra" type="list" labels="Stack from ${on_string}">
              <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
              <discover_datasets pattern="(?P&lt;name&gt;L_.+)\.txt$" ext="tabular" directory="results" />
-             <discover_datasets pattern="(?P&lt;name&gt;L_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;NMRdata_mod_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;beta_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;beta_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;delta_draw_mean_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;delta_sam_.+)\.txt$" ext="tabular" directory="results" />
          </collection>
      </outputs>
      <help>
