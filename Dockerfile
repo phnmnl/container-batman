@@ -1,10 +1,9 @@
-FROM r-base:latest
+FROM r-base:3.3.1
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
 # Perform upgrades
 RUN apt-get -y update
-RUN apt-get -y upgrade
 
 # Install dependencies
 RUN apt-get -y --no-install-recommends install \
