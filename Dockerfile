@@ -1,18 +1,14 @@
-FROM r-base:latest
+FROM r-base:3.3.1
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
 # Perform upgrades
 RUN apt-get -y update
-RUN apt-get -y upgrade
 
 # Install dependencies
 RUN apt-get -y --no-install-recommends install \
-	libapparmor-dev \
-	libedit-dev \
 	libcurl4-openssl-dev \
-	libssl-dev \
-	psmisc
+	libssl-dev
 RUN apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/{cache,log}/ /tmp/* /var/tmp/*
 
 # Install BATMAN dependencies
@@ -24,4 +20,4 @@ ADD runBATMAN.R /usr/local/bin
 RUN chmod 0755 /usr/local/bin/runBATMAN.R
 
 # Define entry point, useful for generale use
-ENTRYPOINT [ "/bin/sh", "-c", "/usr/local/bin/runBATMAN.R" ]
+ENTRYPOINT ["runBATMAN.R"]
