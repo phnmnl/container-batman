@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends r-base r-base-d
     apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/{cache,log}/ /tmp/* /var/tmp/*
 
 # Add runBATMAN.r to /usr/local/bin
+
 ADD runBATMAN.R /usr/local/bin
 RUN chmod 0755 /usr/local/bin/runBATMAN.R
 
