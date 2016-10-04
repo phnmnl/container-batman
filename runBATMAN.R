@@ -114,9 +114,9 @@ if (dir.exists(batmanInputDir)) {
 ## Run BATMAN
 library(batman)
 if (is.null(opt$inputData) & is.null(opt$output) ) {
-  bm <-batman()
+  bm <-batman(showPlot=FALSE)
 } else {
-  bm<-batman(txtFile=opt$inputData, runBATMANDir=opt$output)
+  bm<-batman(txtFile=opt$inputData, runBATMANDir=opt$output,showPlot=FALSE)
   ## Create link to simplify results obtention for tools like 
   ## Galaxy.
   resultsDir<-paste(opt$output,"results",sep="/")
