@@ -13,7 +13,7 @@ RUN apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/{cache,log}/ /t
 
 # Install BATMAN dependencies
 RUN R -e "install.packages(c('doSNOW','plotrix','devtools','getopt','optparse'))"
-RUN R -e "library(devtools); install_github('jianlianggao/docker-batman/batman')"
+RUN R -e "library(devtools); install_github('jianlianggao/docker-batman/batman',ref='eabb79136ae162e8291ac3af0f4c5fcb1f2c217e')"
 
 # Add runBATMAN.r to /usr/local/bin
 ADD runBATMAN.R /usr/local/bin
