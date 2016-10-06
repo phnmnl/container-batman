@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends r-base r-base-d
                               libcurl4-openssl-dev libssl-dev git && \
     echo 'options("repos"="http://cran.rstudio.com", download.file.method = "libcurl")' >> /etc/R/Rprofile.site && \
     R -e "install.packages(c('doSNOW','plotrix','devtools','getopt','optparse'))" && \
-    R -e "library(devtools); install_github('jianlianggao/batman/batman'); remove.packages('devtools')" && \
+    R -e "library(devtools); install_github('jianlianggao/batman/batman',ref='c02ac5cf9206373d2dde1b8e12548964f8379627'); remove.packages('devtools')" && \
     apt-get purge -y r-base-dev git libcurl4-openssl-dev libssl-dev && \
     apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/{cache,log}/ /tmp/* /var/tmp/*
 
