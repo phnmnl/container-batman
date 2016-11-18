@@ -5,7 +5,7 @@ Version: 1.2.1.08
 
 ## Short Description
 
-Bayesian AuTomated Metabolite Analyser for NMR spectra (BATMAN).
+Bayesian Automated Metabolite Analyser for NMR spectra (BATMAN).
 
 ## Description
 
