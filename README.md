@@ -28,7 +28,7 @@ http://batman.r-forge.r-project.org/.
 ## Approaches
 
 - Metabolomics / Targeted
-?
+
 ## Instrument Data Types
 
 - NMR / 1D NMR
