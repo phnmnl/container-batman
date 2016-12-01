@@ -8,7 +8,7 @@ mkdir runBATMAN/BatmanInput
 mkdir runBATMAN/BatmanInput/PureSpectraTemplate
 mkdir runBATMAN/BatmanOnput
 mkdir results
-mkdir runResults
+mkdir preResults
 
 wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/NMRdata.txt -O /usr/local/bin/NMRdata.txt
 
@@ -33,13 +33,13 @@ Rscript runBATMAN.R -i ./NMRdata.txt -o ./runResults -p ./batmanOptions.txt -u .
 
 #download results for comparison
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelCon.txt -O /usr/local/bin/results/RelCon.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelCon.txt -O /usr/local/bin/preResults/RelCon.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelConCreInt.txt -O /usr/local/bin/results/RelConCreInt.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelConCreInt.txt -O /usr/local/bin/preResults/RelConCreInt.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_1_rr_0.txt -O /usr/local/bin/results/beta_1_rr_0.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_1_rr_0.txt -O /usr/local/bin/preResults/beta_1_rr_0.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_2_rr_0.txt -O /usr/local/bin/results/beta_2_rr_0.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_2_rr_0.txt -O /usr/local/bin/preResults/beta_2_rr_0.txt
 
 #copy output files to specified folder for comparison
 # find BATMAN output folder
@@ -50,7 +50,7 @@ output_path="results"
 
 #run comparison
 
-temp="$(diff "$output_path/RelCon.txt" "results/RelCon.txt")"
+temp="$(diff "$output_path/RelCon.txt" "preResults/RelCon.txt")"
 
 if [ ! -z "$temp" ]; then 
    echo "RelCon.txt are not equal"
@@ -59,7 +59,7 @@ else
    echo "RelCon.txt are equal"
 fi
 
-temp="$(diff "$output_path/RelConCreInt.txt" "results/RelConCreInt.txt")"
+temp="$(diff "$output_path/RelConCreInt.txt" "preResults/RelConCreInt.txt")"
 
 if [ ! -z "$temp" ]; then 
    echo "RelConCreInt.txt are not equal"
@@ -68,7 +68,7 @@ else
    echo "RelConCreInt.txt are equal"
 fi
 
-temp="$(diff "$output_path/beta_1_rr_0.txt" "results/beta_1_rr_0.txt")"
+temp="$(diff "$output_path/beta_1_rr_0.txt" "preResults/beta_1_rr_0.txt")"
 
 if [ ! -z "$temp" ]; then 
    echo "beta_1_rr_0.txt are not equal"
@@ -77,7 +77,7 @@ else
    echo "beta_1_rr_0.txt are equal"
 fi
 
-temp="$(diff "$output_path/beta_2_rr_0.txt" "results/beta_2_rr_0.txt")"
+temp="$(diff "$output_path/beta_2_rr_0.txt" "preResults/beta_2_rr_0.txt")"
 
 if [ ! -z "$temp" ]; then 
    echo "beta_2_rr_0.txt are not equal"
