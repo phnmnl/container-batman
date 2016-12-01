@@ -10,13 +10,13 @@ mkdir runBATMAN/BatmanOnput
 mkdir results
 mkdir preResults
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/NMRdata.txt -O ./NMRdata.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/NMRdata.txt -O ./runBATMAN/BatmanInput/NMRdata.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/batmanOptions.txt -O ./batmanOptions.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/batmanOptions.txt -O ./runBATMAN/BatmanInput/batmanOptions.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/metabolitesList.csv -O ./metabolitesList.csv
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/metabolitesList.csv -O ./runBATMAN/BatmanInput/metabolitesList.csv
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/multi_data_user.csv -O ./multi_data_user.csv
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/multi_data_user.csv -O ./runBATMAN/BatmanInput/multi_data_user.csv
 
 wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/PureSpectraTemplate/L-Glutamic%20acid.txt -O "./runBATMAN/BatmanInput/PureSpectraTemplate/L-Glutamic acid.txt"
 
