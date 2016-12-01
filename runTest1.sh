@@ -29,7 +29,7 @@ wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/Pur
 # run BATMAN
 
 
-Rscript runBATMAN.R -i ./NMRdata.txt -o ./runResults -p ./batmanOptions.txt -u ./multi_data_user.csv -l ./metabolitesList.csv
+Rscript /usr/local/bin/runBATMAN.R -i ./NMRdata.txt -o ./runResults -p ./batmanOptions.txt -u ./multi_data_user.csv -l ./metabolitesList.csv
 
 #download results for comparison
 
