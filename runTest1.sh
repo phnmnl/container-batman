@@ -45,6 +45,7 @@ wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/res
 # find BATMAN output folder
 found_subfolders=($(/bin/ls -1 -R | grep '^[0-9]\{2\}_[A-Z,a-z]\{3\}_.*$'))
 output_path="runBATMAN/BatmanOutput/$found_subfolders"
+output_path="results"
 
 
 #run comparison
