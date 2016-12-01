@@ -27,8 +27,7 @@ wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/Pur
 #cp ./multi_data_user.csv runBATMAN/BatmanInput
 #cp ./metabolitesList.csv runBATMAN/BatmanInput
 # run BATMAN
-R -e "library(batman)"
-R -e "bm<-batman()"
+R -e "library(batman); bm<-batman()"
 
 #Rscript /usr/local/bin/runBATMAN.R -i ./NMRdata.txt -o ./runResults -p ./batmanOptions.txt -u ./multi_data_user.csv -l ./metabolitesList.csv
 
