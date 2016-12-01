@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /usr/local/bin
+#cd /usr/local/bin
 
 #download test data
 mkdir runBATMAN
@@ -10,17 +10,17 @@ mkdir runBATMAN/BatmanOnput
 mkdir results
 mkdir preResults
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/NMRdata.txt -O /usr/local/bin/NMRdata.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/NMRdata.txt -O ./NMRdata.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/batmanOptions.txt -O /usr/local/bin/batmanOptions.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/batmanOptions.txt -O ./batmanOptions.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/metabolitesList.csv -O /usr/local/bin/metabolitesList.csv
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/metabolitesList.csv -O ./metabolitesList.csv
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/multi_data_user.csv -O /usr/local/bin/multi_data_user.csv
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/multi_data_user.csv -O ./multi_data_user.csv
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/PureSpectraTemplate/L-Glutamic%20acid.txt -O "/usr/local/bin/runBATMAN/BatmanInput/PureSpectraTemplate/L-Glutamic acid.txt"
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/PureSpectraTemplate/L-Glutamic%20acid.txt -O "./runBATMAN/BatmanInput/PureSpectraTemplate/L-Glutamic acid.txt"
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/PureSpectraTemplate/L-Glutamine.txt -O /usr/local/bin/runBATMAN/BatmanInput/PureSpectraTemplate/L-Glutamine.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/PureSpectraTemplate/L-Glutamine.txt -O ./runBATMAN/BatmanInput/PureSpectraTemplate/L-Glutamine.txt
 
 #cp ./NMRdata.txt runBATMAN/BatmanInput
 #cp ./batmanOptions.txt runBATMAN/BatmanInput
@@ -33,13 +33,13 @@ Rscript runBATMAN.R -i ./NMRdata.txt -o ./runResults -p ./batmanOptions.txt -u .
 
 #download results for comparison
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelCon.txt -O /usr/local/bin/preResults/RelCon.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelCon.txt -O ./preResults/RelCon.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelConCreInt.txt -O /usr/local/bin/preResults/RelConCreInt.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/RelConCreInt.txt -O ./preResults/RelConCreInt.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_1_rr_0.txt -O /usr/local/bin/preResults/beta_1_rr_0.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_1_rr_0.txt -O ./preResults/beta_1_rr_0.txt
 
-wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_2_rr_0.txt -O /usr/local/bin/preResults/beta_2_rr_0.txt
+wget https://raw.githubusercontent.com/jianlianggao/batman/develop/test_data/results/beta_2_rr_0.txt -O ./preResults/beta_2_rr_0.txt
 
 #copy output files to specified folder for comparison
 # find BATMAN output folder
