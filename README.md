@@ -46,7 +46,7 @@ Screen shots obtained from the original BATMAN page.
 
 ## Container Contributors
 
-- [Jianliang Gao](https://github.com/jianlianggao) (Imperial College London)
+- [Jianliang Gao](https://github.com/jianlianggao) (Imperial College London), [Pablo Moreno](https://github.com/pcm32)
 
 ## Website
 
