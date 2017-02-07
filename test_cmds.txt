@@ -1,0 +1,2 @@
+which runBATMAN.R
+which runTest1.sh
