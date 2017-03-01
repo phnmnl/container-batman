@@ -1,7 +1,7 @@
 ![Logo](BATMAN_logo.gif)
 
 # BATMAN
-Version: 1.2.1.08
+Version: 1.2.1.07
 
 ## Short Description
 
@@ -46,7 +46,8 @@ Screen shots obtained from the original BATMAN page.
 
 ## Container Contributors
 
-- [Jianliang Gao](https://github.com/jianlianggao) (Imperial College London), [Pablo Moreno](https://github.com/pcm32)
+- [Jianliang Gao](https://github.com/jianlianggao) (Imperial College London) 
+- [Pablo Moreno](https://github.com/pcm32) (EMBL-EBI)
 
 ## Website
 
@@ -57,20 +58,24 @@ Screen shots obtained from the original BATMAN page.
 
 - https://github.com/phnmnl/container-batman.git
 
-## Installation 
+## Installation
+
+This tool is preloaded in PhenoMeNal Galaxy deployments. 
 
 For local individual installation:
 
 ```bash
-docker pull docker-registry.phenomenal-h2020.eu/phnmnl/batman
+docker pull container-registry.phenomenal-h2020.eu/phnmnl/batman
 ```
 
 ## Usage Instructions
 
+Available on PhenoMeNal Galaxy instances under PhenoMeNal H2020 Tools -> NMR.
+
 For direct docker usage:
 
 ```bash
-docker run docker-registry.phenomenal-h2020.eu/phnmnl/batman ...
+docker run container-registry.phenomenal-h2020.eu/phnmnl/batman -i /data/nmr_spectra_input.txt -o /data -p /data/batman_options.txt -u /data/multi_data_user.csv -l /data/metabolitesList.txt
 ```
 
 ## Publications
