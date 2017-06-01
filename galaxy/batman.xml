@@ -27,12 +27,6 @@ runBATMAN.R -i ${nmr_spectra_input}
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
          <data name="MultipletsPpmShifts" format="tabular" from_work_dir="results/MultipletsPpmShifts.txt" label="A table (M x n) containing the posterior means of multiplets ppm shift for M multiplets as its rows."/>
          <data name="RelConCreInt" format="tabular" from_work_dir="results/RelConCreInt.txt" label="Relative concentrations in the Confidence Interval of 95%"/>
-         <data name="batmanOptions" format="tabular" from_work_dir="results/batmanOptions.txt" label="A copy of BATMAN options for this run."/>
-         <data name="metabolitesList" format="tabular" from_work_dir="results/metabolitesList.csv" label="A copy of targeted metabolites list for this run."/>
-         <data name="metabolitesListUsed" format="tabular" from_work_dir="results/metabolitesListUsed.txt" label="Another copy of targeted metabolites list for this run in TXT format."/>
-         <data name="multi_data" format="tabular" from_work_dir="results/multi_data.dat" label="A copy of metabolites NMR resonance characteristics and chemical shift templates of targeted metabolites."/>
-         <data name="NMRdata" format="tabular" from_work_dir="results/NMRdata.txt" label="A copy of input NMR data ."/>
-         <data name="spectraTitle" format="tabular" from_work_dir="results/spectraTitle.txt" label="A copy of spectra titles from input NMR data."/>
 
          <collection name="spectra" type="list" labels="Stack from ${on_string}">
              <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
