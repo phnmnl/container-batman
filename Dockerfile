@@ -6,7 +6,7 @@ LABEL software.version="1.2.12.0"
 LABEL version="1.0"
 LABEL software="batman"
 
-ENV BATMAN_REVISION "325ffbe12df8399e5f029b9044b5dca488224f49"
+ENV BATMAN_REVISION "889c91b17ad89092c7f937da8a437a8ab982193e"
 
 # Install R and BATMAN
 RUN apt-get update && apt-get install -y --no-install-recommends r-base r-base-dev \
