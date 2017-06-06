@@ -118,6 +118,29 @@ resultsDir<-paste(opt$output,"results",sep="/")
 if (!file.exists(resultsDir)) {dir.create(resultsDir)}
 zipfile_output<-paste(resultsDir, "zip_output", sep="/")
 zip(zipfile=zipfile_output,files=bm$outputDir)
+
+## keep RelCon.txt, MultipletsPpmShifts.txt, and RelConCreInt.txt for user review in page
+#find the specific files need to be copied
+file2copy1<-dir(bm$outputDir, pattern = 'RelCon.txt')
+#get the full path to the files to be copied
+file2copy<-paste(bm$outputDir, file2copy1,sep='/')
+#copy the files
+file.copy(file2copy, resultsDir, recursive = TRUE)
+
+#find the specific files need to be copied
+file2copy1<-dir(bm$outputDir, pattern = 'MultipletsPpmShifts.txt')
+#get the full path to the files to be copied
+file2copy<-paste(bm$outputDir, file2copy1,sep='/')
+#copy the files
+file.copy(file2copy, resultsDir, recursive = TRUE)
+
+#find the specific files need to be copied
+file2copy1<-dir(bm$outputDir, pattern = 'RelConCreInt.txt')
+#get the full path to the files to be copied
+file2copy<-paste(bm$outputDir, file2copy1,sep='/')
+#copy the files
+file.copy(file2copy, resultsDir, recursive = TRUE)
+
 #find the specific files need to be removed
 file2remove1<-dir(bm$outputDir, pattern = '*.txt')
 #get the full path to the files to be removed
