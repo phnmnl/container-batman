@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
-LABEL software.version="1.2.1.0.7"
+LABEL software.version="1.2.12.0"
 LABEL version="1.0"
 LABEL software="batman"
 
