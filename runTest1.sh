@@ -49,21 +49,21 @@ output_path="$PWD/results"
 #run checking
 
 #temp="$(diff "$output_path/specFit_1_rr_0.txt" "preResults/specFit_1_rr_0.txt")"
-temp="$output_path/specFit_1_rr_0.txt"
+temp="$output_path/RelCon.txt"
 if [ ! -f "$temp" ]; then 
-   echo "specFit_1_rr_0.txt was not generated."
+   echo "RelCon.txt.txt was not generated."
    exit 1
 else
-   echo "specFit_1_rr_0.txt was generated"
+   echo "RelCon.txt was generated"
 fi
 
 #temp="$(diff "$output_path/specFit_2_rr_0.txt" "preResults/specFit_2_rr_0.txt")"
-temp="$output_path/specFit_2_rr_0.txt"
+temp="$output_path/RelConCreInt.txt"
 if [ ! -f "$temp" ]; then 
-   echo "specFit_2_rr_0.txt was not generated."
+   echo "RelConCreInt.txt was not generated."
    exit 1
 else
-   echo "specFit_2_rr_0.txt was generated."
+   echo "RelConCreInt.txt was generated."
 fi
 
 #temp="$(diff "$output_path/specFit_3_rr_0.txt" "preResults/specFit_3_rr_0.txt")"
