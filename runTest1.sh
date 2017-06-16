@@ -41,29 +41,29 @@ runBATMAN.R -i runBATMAN/BatmanInput/NMRdata.txt -o runBATMAN/BatmanOutput -p ru
 
 #copy output files to specified folder for comparison
 # find BATMAN output folder
-#found_subfolders=($(/bin/ls -R | grep '^[0-9]\{2\}_[A-Z,a-z]\{3\}_.*$'))
-#output_path="runBATMAN/BatmanOutput/$found_subfolders"
-output_path="./results"
-ls $output_path
+found_subfolders=($(/bin/ls -R | grep '^[0-9]\{2\}_[A-Z,a-z]\{3\}_.*$'))
+output_path="runBATMAN/BatmanOutput/$found_subfolders"
+#output_path="./results"
+#ls $output_path
 
 #run checking
 
 #temp="$(diff "$output_path/specFit_1_rr_0.txt" "preResults/specFit_1_rr_0.txt")"
-temp="$output_path/RelCon.txt"
+temp="$output_path/specFit_1to2_.pdf"
 if [ ! -f "$temp" ]; then 
-   echo "RelCon.txt.txt was not generated."
+   echo "specFit_1to2_.pdf was not generated."
    exit 1
 else
-   echo "RelCon.txt was generated"
+   echo "specFit_1to2_.pdf was generated"
 fi
 
 #temp="$(diff "$output_path/specFit_2_rr_0.txt" "preResults/specFit_2_rr_0.txt")"
-temp="$output_path/RelConCreInt.txt"
+temp="$output_path/specFit_3to4_.pdf"
 if [ ! -f "$temp" ]; then 
-   echo "RelConCreInt.txt was not generated."
+   echo "specFit_3to4_.pdf was not generated."
    exit 1
 else
-   echo "RelConCreInt.txt was generated."
+   echo "specFit_3to4_.pdf was generated."
 fi
 
 #temp="$(diff "$output_path/specFit_3_rr_0.txt" "preResults/specFit_3_rr_0.txt")"
