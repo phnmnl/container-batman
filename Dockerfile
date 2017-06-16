@@ -27,4 +27,4 @@ ADD runTest1.sh /usr/local/bin/
 RUN chmod a+x /usr/local/bin/runTest1.sh
 
 # Define entry point, useful for generale use
-ENTRYPOINT ["runTest1.sh"]
+ENTRYPOINT ["runBATMAN.R"]
