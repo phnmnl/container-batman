@@ -45,13 +45,14 @@ found_subfolders=($(/bin/ls -R | grep '^[0-9]\{2\}_[A-Z,a-z]\{3\}_.*$'))
 output_path="runBATMAN/BatmanOutput/$found_subfolders"
 #output_path="./results"
 #ls $output_path
-
+echo $output_path
+outputs=$(/bin/ls -R $output_path/*.pdf)
 #run checking
 
 #temp="$(diff "$output_path/specFit_1_rr_0.txt" "preResults/specFit_1_rr_0.txt")"
 #temp="$output_path/specFit_1to2_.pdf"
 
-if /bin/ls $output_path/*.pdf 1> /dev/null 2>&1; then
+if [ $outputs>0 ]; then
     echo "BATMAN ran successfully"
 else
     echo "BATMAN might not run successfully"
