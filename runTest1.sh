@@ -46,7 +46,7 @@ output_path="runBATMAN/BatmanOutput/$found_subfolders"
 #output_path="./results"
 #ls $output_path
 echo $output_path
-outputs=$(/bin/ls -R $output_path/*.pdf)
+outputs=$(/bin/ls -R $output_path/*.pdf |wc -l)
 #run checking
 
 #temp="$(diff "$output_path/specFit_1_rr_0.txt" "preResults/specFit_1_rr_0.txt")"
