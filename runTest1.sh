@@ -43,7 +43,7 @@ runBATMAN.R -i runBATMAN/BatmanInput/NMRdata.txt -o runBATMAN/BatmanOutput -p ru
 # find BATMAN output folder
 #found_subfolders=($(/bin/ls -R | grep '^[0-9]\{2\}_[A-Z,a-z]\{3\}_.*$'))
 #output_path="runBATMAN/BatmanOutput/$found_subfolders"
-output_path="$PWD/results"
+output_path="results"
 
 
 #run checking
