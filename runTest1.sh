@@ -49,22 +49,30 @@ output_path="runBATMAN/BatmanOutput/$found_subfolders"
 #run checking
 
 #temp="$(diff "$output_path/specFit_1_rr_0.txt" "preResults/specFit_1_rr_0.txt")"
-temp="$output_path/specFit_1to2_.pdf"
-if [ ! -f "$temp" ]; then 
-   echo "specFit_1to2_.pdf was not generated."
-   exit 1
+#temp="$output_path/specFit_1to2_.pdf"
+
+if ls $output_path/*.pdf 1> /dev/null 2>&1; then
+    echo "BATMAN ran successfully"
 else
-   echo "specFit_1to2_.pdf was generated"
+    echo "BATMAN might not run successfully"
+    exit 1
 fi
 
+#if [ ! -f "$temp" ]; then 
+#   echo "specFit_1to2_.pdf was not generated."
+#   exit 1
+#else
+#   echo "specFit_1to2_.pdf was generated"
+#fi
+
 #temp="$(diff "$output_path/specFit_2_rr_0.txt" "preResults/specFit_2_rr_0.txt")"
-temp="$output_path/specFit_3to4_.pdf"
-if [ ! -f "$temp" ]; then 
-   echo "specFit_3to4_.pdf was not generated."
-   exit 1
-else
-   echo "specFit_3to4_.pdf was generated."
-fi
+#temp="$output_path/specFit_3to4_.pdf"
+#if [ ! -f "$temp" ]; then 
+#   echo "specFit_3to4_.pdf was not generated."
+#   exit 1
+##else
+#   echo "specFit_3to4_.pdf was generated."
+#fi
 
 #temp="$(diff "$output_path/specFit_3_rr_0.txt" "preResults/specFit_3_rr_0.txt")"
 
