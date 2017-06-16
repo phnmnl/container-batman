@@ -51,7 +51,7 @@ output_path="runBATMAN/BatmanOutput/$found_subfolders"
 #temp="$(diff "$output_path/specFit_1_rr_0.txt" "preResults/specFit_1_rr_0.txt")"
 #temp="$output_path/specFit_1to2_.pdf"
 
-if sudo ls $output_path/*.pdf 1> /dev/null 2>&1; then
+if /bin/ls $output_path/*.pdf 1> /dev/null 2>&1; then
     echo "BATMAN ran successfully"
 else
     echo "BATMAN might not run successfully"
