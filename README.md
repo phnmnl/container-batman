@@ -1,7 +1,7 @@
 ![Logo](BATMAN_logo.gif)
 
 # BATMAN
-Version: 1.2.1.07
+Version: 1.2.12.0
 
 ## Short Description
 
@@ -75,7 +75,7 @@ Available on PhenoMeNal Galaxy instances under PhenoMeNal H2020 Tools -> NMR.
 For direct docker usage:
 
 ```bash
-docker run container-registry.phenomenal-h2020.eu/phnmnl/batman -i /data/nmr_spectra_input.txt -o /data -p /data/batman_options.txt -u /data/multi_data_user.csv -l /data/metabolitesList.txt
+docker run -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/batman -i /data/nmr_spectra_input.txt -o /data -p /data/batman_options.txt -u /data/multi_data_user.csv -l /data/metabolitesList.csv
 ```
 
 ## Publications
