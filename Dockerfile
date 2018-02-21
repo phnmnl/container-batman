@@ -1,14 +1,14 @@
 FROM ubuntu:16.04
 
-MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
-
-
-
-
+LABEL maintainer="PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )"
 LABEL software.version="1.2.12.0"
-
 LABEL version="1.0"
 LABEL software="batman"
+LABEL description="Estimates metabolite concentrations from Nuclear Magnetic Resonance spectral data using a specialised MCMC algorithm"
+LABEL website="http://batman.r-forge.r-project.org/"
+LABEL documentation="https://r-forge.r-project.org/scm/viewvc.php/*checkout*/documentation%20and%20test/batman.pdf?root=batman"
+LABEL license="undefined"
+LABEL tags="Metabolomics"
 
 ENV BATMAN_REVISION "76f57f954c0b980ac0b506ed60b4db704515fbeb"
 
