@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 LABEL maintainer="PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )"
 LABEL software.version="1.2.12.0"
-LABEL version="1.0"
+LABEL version="1.1"
 LABEL software="batman"
 LABEL description="Estimates metabolite concentrations from Nuclear Magnetic Resonance spectral data using a specialised MCMC algorithm"
 LABEL website="http://batman.r-forge.r-project.org/"
